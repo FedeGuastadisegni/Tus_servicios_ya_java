@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"> 
+<hibernate-mapping>
+
+	<class name="datos.Localidad" table="tbllocalidades">
+		<id column="idLocalidad" name="idLocalidad">
+			<generator class="identity" /></id>
+
+		<property column="nombre" name="nombre" type="string" />
+		
+		<many-to-one name="partido" class="datos.Partido" column="partido" not-null="true"/>
+		
+		<set name="instituciones" table="tblinstituciones" inverse="true" lazy="true"
+			fetch="select">
+			<key>
+				<column name="localidad" not-null="true" />
+			</key>
+			<one-to-many class="datos.Institucion" />
+		</set>
+
+	</class>
+</hibernate-mapping>
